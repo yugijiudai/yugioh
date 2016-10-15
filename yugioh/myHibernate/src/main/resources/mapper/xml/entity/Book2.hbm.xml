@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.yugi.annotation.pojo">
+    <!--<class name="Book2" table="t_book" lazy="false">-->
+    <class name="Book2" table="t_book">
+        <cache usage="read-only"/>
+        <id name="id">
+            <generator class="native"/>
+        </id>
+        <property name="name"/>
+        <property name="price"/>
+        <property name="author"/>
+        <property name="pubDate"/>
+        <many-to-one name="category2" class="Category2" column="category_id" cascade="save-update"/>
+    </class>
+</hibernate-mapping>

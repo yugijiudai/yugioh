@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.yugi.xml.pojo">
+    <class name="Grade3" table="t_grade">
+        <id name="id" column="id">
+            <generator class="native"/>
+        </id>
+        <property name="name"/>
+        <map name="students">
+            <!--key表示外键-->
+            <key column="grade_id"/>
+            <!--map-key是映射为map集时,对应key值 key值建议为唯一-->
+            <map-key type="java.lang.String" column="name"/>
+            <one-to-many class="Student3"/>
+        </map>
+    </class>
+</hibernate-mapping>

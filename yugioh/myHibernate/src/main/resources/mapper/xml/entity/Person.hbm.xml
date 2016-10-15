@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.yugi.entity">
+    <!--只有一张表-->
+    <class name="com.yugi.xml.entity.Person" table="t_person">
+        <id name="id" column="id">
+            <generator class="native"/>
+        </id>
+        <!--指明鉴别器,要放在id后-->
+        <discriminator column="type" type="string"/>
+        <property name="name"/>
+        <property name="age"/>
+        <subclass name="com.yugi.xml.entity.Student" discriminator-value="s">
+            <property name="work"/>
+        </subclass>
+        <subclass name="com.yugi.xml.entity.Teacher" discriminator-value="t">
+            <property name="salary"/>
+        </subclass>
+    </class>
+    <!--也可以写在同级-->
+    <!--<subclass name="Student" discriminator-value="s" extends="Person">-->
+    <!--<property name="work"/>-->
+    <!--</subclass>-->
+    <!--<subclass name="Teacher" discriminator-value="t" extends="Person">-->
+    <!--<property name="salary"/>-->
+    <!--</subclass>-->
+</hibernate-mapping>

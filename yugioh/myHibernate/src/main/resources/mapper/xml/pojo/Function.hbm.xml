@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.yugi.xml.pojo">
+    <class name="Function" table="t_function">
+        <id name="id">
+            <generator class="native"/>
+        </id>
+        <property name="name"/>
+        <property name="code"/>
+        <property name="url"/>
+        <set name="roles" inverse="true" table="t_role_func">
+            <!--key:表示当前类映射到关系表中的列,对应上面的id name="id"-->
+            <key column="fid"/>
+            <!--所对应的另一方在关系表中的列,即Role.hbm.xml的id name="id",当然也可以加column="rid"起别名-->
+            <many-to-many column="rid" class="Role"/>
+        </set>
+    </class>
+</hibernate-mapping>

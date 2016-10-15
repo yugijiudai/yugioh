@@ -1,0 +1,10 @@
+Hibernate加载策略
+1、即时加载 –get加载数据
+使用get获取数据，会立即查找（缓存—数据库）
+2、延迟加载 懒加载 lazy—load，不会立即查找，当需要的时候才会查找
+容易造成：LazyInitialaztionException异常：因为session被关闭。
+3、Load支持延迟加载，get不支持延迟加载。如果没有设置延迟加载，那么load也会立即加载对象。
+4、class的lazy
+a)class默认情况下是支持懒加载如果设置lazy=false，get和load都会立即加载对象。
+5、set\list默认下是lazy=true的。支持懒加载，但是当使用size（）的时候依然要去查询整个set集合的内容。Lazy=false；立即查询所有集合的内容。Lazy=extra比较智能。支持懒加载，当使用size()的时候,不会查询整个集合，仅仅查询集合中元素的个数。当需要使用集合元素的内容时，再去查询集合内容。
+6、单端关联上的lazy：（many-to-one,ont-to-one）默认是支持懒加载lazy=proxy

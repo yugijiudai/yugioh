@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ALL < TRACE < DEBUG < INFO < WARN < ERROR < OFF -->
+<Configuration status="off" monitorInterval="5000">
+    <Properties>
+        <Property name="project">sst</Property>
+        <Property name="filePath">F:/logs/${project}</Property>
+        <Property name="datePatternSuffix">%d{yyyy-MM-dd}.log</Property>
+        <Property name="patternLayout">%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] [%5p] %l %logger - %msg%n
+        </Property>
+        <Property name="sqlPatternLayout">%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] [%5p] %l %logger - %msg%n \n\n
+        </Property>
+        <Property name="devLog">${filePath}/dev/dev</Property>
+        <Property name="sqlLog">${filePath}/sql/sql</Property>
+    </Properties>
+
+    <Appenders>
+
+        <!-- 开发调试日志 -->
+        <RollingRandomAccessFile name="DevLog" fileName="${devLog}.log" filePattern="${devLog}.${datePatternSuffix}">
+            <PatternLayout pattern="${patternLayout}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+        </RollingRandomAccessFile>
+        <!-- SQL记录日志 -->
+        <RollingRandomAccessFile name="SqlLog" fileName="${sqlLog}.log" filePattern="${sqlLog}.${datePatternSuffix}">
+            <PatternLayout pattern="${sqlPatternLayout}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+        </RollingRandomAccessFile>
+
+    </Appenders>
+
+    <Loggers>
+        <!--默认加载的日志-->
+        <Root level="ERROR">
+            <AppenderRef ref="DevLog" level="ERROR"/>
+        </Root>
+        <!--sql的日志会在后台和日志里输出-->
+        <!--<Logger name="org.hibernate.SQL" level="DEBUG"/>-->
+        <Logger name="org.hibernate.type" level="DEBUG"/>
+        <Logger name="org.hibernate.jdbc" level="ERROR"/>
+        <Logger name="org.hibernate.tool.hbm2ddl" level="ERROR"/>
+        <Logger name="org.hibernate.pretty" level="ERROR"/>
+        <Logger name="org.hibernate.cache" level="ERROR"/>
+        <Logger name="org.hibernate.transaction" level="ERROR"/>
+        <Logger name="org.hibernate.hql.ast.AST" level="ERROR"/>
+        <Logger name="org.hibernate.secure" level="ERROR"/>
+        <!--<logger name="org.hibernate">-->
+        <!--<AppenderRef ref="SqlLog" level="INFO"/>-->
+        <!--</logger>-->
+        <logger name="org.hibernate.SQL" level="DEBUG">
+            <AppenderRef ref="SqlLog"/>
+        </logger>
+
+    </Loggers>
+</Configuration>

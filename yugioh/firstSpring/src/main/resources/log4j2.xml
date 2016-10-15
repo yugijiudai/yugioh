@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ALL < TRACE < DEBUG < INFO < WARN < ERROR < OFF -->
+<Configuration status="OFF">
+    <Properties>
+        <Property name="model">console</Property>
+        <Property name="filePath">F://logs/</Property>
+        <Property name="datePatternSuffix">%d{yyyy-MM-dd}.log</Property>
+        <!--可以加[%X{HHH}] 获得ThreadContext.put("HHH", "日志属性")-->
+        <Property name="patternLayout">[%X{hhh}]      %d{yyyy-MM-dd HH:mm:ss.SSS} [%5p] - %l - %m%n</Property>
+        <Property name="devLog">${filePath}/${model}</Property>
+        <Property name="sqlLog">${filePath}/sql</Property>
+    </Properties>
+
+    <Appenders>
+        <!-- 控制台 -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${patternLayout}"/>
+        </Console>
+        <!-- 开发调试日志 -->
+        <RollingRandomAccessFile name="DevLog" fileName="${devLog}.log" filePattern="${devLog}.${datePatternSuffix}">
+            <PatternLayout pattern="${patternLayout}" />
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+            </Policies>
+        </RollingRandomAccessFile>
+        <!-- SQL记录日志 -->
+        <RollingRandomAccessFile name="SqlLog" fileName="${sqlLog}.log" filePattern="${sqlLog}.${datePatternSuffix}">
+            <PatternLayout pattern="${patternLayout}" />
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+            </Policies>
+        </RollingRandomAccessFile>
+    </Appenders>
+
+    <Loggers>
+        <Logger name="com.dimeng" level="INFO"/>
+        <!--获取log.sql: Logger sqlLogger = LoggerFactory.getLogger("log.sql");-->
+        <Logger name="log.sql" level="DEBUG" additivity="false">
+            <AppenderRef ref="SqlLog"/>
+        </Logger>
+        <Root level="INFO">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="DevLog"/>
+        </Root>
+    </Loggers>
+</Configuration>

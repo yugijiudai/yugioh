@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.yugi.entity">
+    <!--每个子类一张表,每张表都有person的内容,指定abstract后不会生成person表-->
+    <class name="com.yugi.xml.entity.Person" table="t_person" abstract="true">
+        <id name="id" column="id">
+            <!--主键的生成不能使用identity,建议使用uuid,sequence,assigned-->
+            <generator class="assigned"/>
+        </id>
+        <property name="name"/>
+        <property name="age"/>
+        <union-subclass name="com.yugi.xml.entity.Student" table="t_student">
+            <property name="work"/>
+        </union-subclass>
+        <union-subclass name="com.yugi.xml.entity.Teacher" table="t_teacher">
+            <property name="salary"/>
+        </union-subclass>
+    </class>
+
+</hibernate-mapping>

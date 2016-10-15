@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.yugi.annotation.pojo">
+    <class name="User" table="t_user">
+        <id name="id" column="id">
+            <generator class="native"/>
+        </id>
+        <!--乐观锁版本-->
+        <version name="version"/>
+        <property name="name"/>
+        <property name="pwd"/>
+    </class>
+</hibernate-mapping>

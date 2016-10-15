@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+                http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd  
+                http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+                http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!-- 对包中的所有类进行扫描，以完成Bean创建和自动依赖注入的功能 稍后会创建该包：webmvct.cmd -->
+    <context:component-scan base-package="com.yugi.ctrl"/>
+
+    <!--controller AOP拦截 start-->
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+    <context:component-scan base-package="com.yugi.logger"/>
+    <!--controller AOP拦截 end-->
+
+    <!-- 默认的注解映射的支持,不加这个requestBody接收json对象会报错 -->
+    <mvc:annotation-driven/>
+
+    <!-- 定义Spring MVC 的模板文件 -->
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <!-- 支持JSTL -->
+        <property name="prefix" value="/WEB-INF/"/>
+        <!-- 模板的路径 -->
+        <property name="suffix" value=".jsp"/>
+        <!-- 模板文件的后缀 -->
+    </bean>
+
+</beans>  

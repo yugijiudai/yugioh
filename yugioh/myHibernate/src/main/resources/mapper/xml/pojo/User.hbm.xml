@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!--package声明pojo类所在的包,如果不写,那么在class中需要指明pojo类所在的包,schema指数据库模式,一个模式下可以有多张表-->
+<hibernate-mapping package="com.yugi.xml.pojo">
+    <!--class指映射一个pojo类，提供了公共的无参构造方法通过反射产生对象,属性用private修饰,并且生成对应的get/set方法,类不能用final修饰,hibernate会产生代理类(cglib),
+    类需要指明标识,name表示pojo类名,table表示pojo类对应数据库中的表名,如果不写默认是类名-->
+    <class name="User" table="t_user">
+        <!--<class name="com.yugi.pojo.User" table="t_user">-->
+        <!--id表示实体类的标识(OID)，对应数据库表中的主键,name指实体类的标识属性名,column表示对应数据库表的列名,如果不写则和数据库表中列名和属性名一致,length表示数据库表中
+        对应类型的长度,如果不写有默认长度,type表示类型如果不写hibernate可以找到对应pojo类的属性的类型-->
+        <id name="id" type="java.lang.Long" column="id">
+            <!--主键生成策略,increment,identity,sequence,uuid,native,assigned-->
+            <generator class="native"/>
+        </id>
+        <!--实体类的属性,name指明pojo类属性名称(区分大小写)-->
+        <property name="name" type="java.lang.String"/>
+        <property name="pwd" type="java.lang.String"/>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.yugi.xml.pojo">
+    <class name="Student" table="t_student">
+        <id name="id" column="id">
+            <generator class="native"/>
+        </id>
+        <property name="name"/>
+        <property name="age"/>
+        <property name="image" type="java.sql.Blob"/>
+        <property name="introduce" type="java.sql.Clob"/>
+        <!--多对一 name表示属性名 class指明这个属性对应的类 column指数据库表中的列名 foreign-key表示外键的名字-->
+        <!--<many-to-one name="grade" class="Grade" column="grade_id" foreign-key="fk_grade" not-null="true"/>-->
+        <many-to-one name="grade" class="Grade" column="grade_id" cascade="all"/>
+        <!--在双向的一对多关系映射中,注意一的一段配置:<key>中不用指定非空not-null,如果想要一的一端来维护关系,那么在多的一端不用指定关联列非空-->
+        <!--即这里设置了not-null="true,插入的时候一定要student.setGrade(grade);如果没设置可以用student.setGrade(grade);或者grade.getStudents().add(student);-->
+        <!--
+            cascade级联,让操作级联到子实体,
+            save-update 保存和更新多的一端数据时,一的一端的数据可以一起保存和更新,
+            none:不级联
+            delete:删除级联==不能设置not-null,不建议在多的一端设置，因为删除多的一端时会报错！
+            all:表示所有操作都级联
+        -->
+    </class>
+</hibernate-mapping>

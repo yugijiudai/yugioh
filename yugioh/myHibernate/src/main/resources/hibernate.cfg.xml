@@ -1,0 +1,47 @@
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<!--声明Hibernate配置文件的开始-->
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost/hibernate4?characterEncoding=utf8</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password">111111</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <!--<property name="hibernate.connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>-->
+        <!--<property name="hibernate.connection.url">jdbc:sqlserver://localhost:1433;databaseName=hibernate4</property>-->
+        <!--<property name="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</property>-->
+        <!--<property name="hibernate.connection.username">sa</property>-->
+        <!--<property name="hibernate.connection.password">p2ssword</property>-->
+        <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.format_sql">true</property>
+        <property name="hibernate.use_sql_comments">true</property>
+
+
+        <!-- hibernate3的二级缓存配置 -->
+        <!-- <property name="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</property> -->
+        <!-- 开启查询缓存 -->
+
+        <!-- 配置二级缓存(注:如果开启了二级缓存,则要slf4j-log4j12包和log4j.properties的文件) -->
+        <property name="hibernate.cache.use_second_level_cache">true</property>
+        <property name="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</property>
+        <!--配置查询缓存-->
+        <property name="hibernate.cache.use_query_cache">true</property>
+
+        <!--数据库更新方式-->
+        <!--1.create:每次执行都先把原有数据表删除,然后创建该表-->
+        <!--2.create-drop:在显式关闭SessionFactory时,将drop掉数据库schema-->
+        <!--3.validate:检测-->
+        <!--4.update:如果表不存在则创建，有就不用创建-->
+        <property name="hbm2ddl.auto">update</property>
+        <mapping resource="mapper/xml/entity/Book2.hbm.xml"/>
+        <mapping resource="mapper/xml/entity/Category2.hbm.xml"/>
+        <!--<mapping class="com.yugi.annotation.pojo.User"/>-->
+        <!--<mapping resource="mapper/annotation/User.hbm.xml"/>-->
+        <!--<mapping class="com.yugi.annotation.pojo.Book"/>-->
+        <!--<mapping class="com.yugi.annotation.pojo.Category"/>-->
+
+    </session-factory>
+</hibernate-configuration>
+

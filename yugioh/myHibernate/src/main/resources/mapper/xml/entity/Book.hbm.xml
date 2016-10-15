@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.yugi.annotation.pojo">
+    <class name="Book" table="t_book">
+        <id name="id">
+            <generator class="native"/>
+        </id>
+        <property name="name"/>
+        <property name="price"/>
+        <property name="author"/>
+        <property name="pubDate"/>
+        <many-to-one name="category" class="Category" column="category_id" cascade="all"/>
+        <!--使用过滤器-->
+        <filter name="bookFilter" condition="id=:id"/>
+    </class>
+    <!--过滤器的定义:定义参数-->
+    <filter-def name="bookFilter">
+        <filter-param name="id" type="integer"/>
+    </filter-def>
+</hibernate-mapping>

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.yugi.annotation.pojo">
+    <class name="Book" table="t_book">
+        <cache usage="read-write"/>
+        <id name="id" column="id">
+            <generator class="native"/>
+        </id>
+        <property name="name"/>
+        <property name="price"/>
+        <property name="author"/>
+        <property name="pubDate"/>
+    </class>
+</hibernate-mapping>

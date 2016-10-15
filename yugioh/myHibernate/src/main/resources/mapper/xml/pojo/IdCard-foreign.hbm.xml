@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.yugi.xml.pojo">
+    <class name="IdCard" table="t_idCard">
+        <id name="id" column="id">
+            <generator class="native"/>
+        </id>
+        <property name="code"/>
+        <!--property-ref对应的是Person.hbm.xml里的many-to-one的name-->
+        <!--这个是基于外键的-->
+        <one-to-one name="person" property-ref="idCard"/>
+    </class>
+</hibernate-mapping>

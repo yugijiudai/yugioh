@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ALL < TRACE < DEBUG < INFO < WARN < ERROR < OFF -->
+<Configuration status="off" monitorInterval="5000">
+    <Properties>
+        <Property name="project">myHibernate</Property>
+        <!--<Property name="filePath">../logs/secondSpring/</Property>-->
+        <Property name="filePath">F:/logs/${project}</Property>
+        <Property name="datePatternSuffix">%d{yyyy-MM-dd}.log</Property>
+        <!--可以加[%X{HHH}] 获得ThreadContext.put("HHH", "日志属性")-->
+        <!--<Property name="patternLayout">[%X{hhh}]      %d{yyyy-MM-dd HH:mm:ss.SSS} [%5p] - %l - %m%n</Property>-->
+        <Property name="patternLayout">%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] [%5p] %l - %msg%n</Property>
+        <Property name="sqlPatternLayout">%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] [%5p] %l - %msg%n</Property>
+        <Property name="devLog">${filePath}/dev/dev</Property>
+        <Property name="sqlLog">${filePath}/sql/sql</Property>
+        <Property name="errorLog">${filePath}/error/error</Property>
+    </Properties>
+
+    <Appenders>
+        <!-- 控制台 -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${patternLayout}"/>
+        </Console>
+        <!-- 开发调试日志 -->
+        <RollingRandomAccessFile name="DevLog" fileName="${devLog}.log" filePattern="${devLog}.${datePatternSuffix}">
+            <PatternLayout pattern="${patternLayout}" />
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+            </Policies>
+        </RollingRandomAccessFile>
+        <!-- SQL记录日志 -->
+        <RollingRandomAccessFile name="SqlLog" fileName="${sqlLog}.log" filePattern="${sqlLog}.${datePatternSuffix}">
+            <PatternLayout pattern="${sqlPatternLayout}" />
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+            </Policies>
+        </RollingRandomAccessFile>
+        <!-- 异常记录日志 -->
+        <RollingRandomAccessFile name="ErrorLog" fileName="${errorLog}.log" filePattern="${error}.${datePatternSuffix}">
+            <PatternLayout pattern="${patternLayout}" />
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+            </Policies>
+        </RollingRandomAccessFile>
+    </Appenders>
+
+    <Loggers>
+        <!--默认加载的日志-->
+        <Root level="DEBUG">
+            <AppenderRef ref="Console" level="DEBUG"/>
+            <AppenderRef ref="DevLog" level="ERROR"/>
+        </Root>
+        <!--sql的日志会在后台和日志里输出-->
+        <logger name="log.sql" level="DEBUG" additivity="false">
+            <AppenderRef ref="SqlLog"/>
+            <AppenderRef ref="Console"/>
+        </logger>
+        <!--开发日志会再后台和日志输出-->
+        <logger name="error.log" level="ERROR" additivity="false">
+            <AppenderRef ref="ErrorLog"/>
+            <AppenderRef ref="Console"/>
+        </logger>
+    </Loggers>
+</Configuration>
