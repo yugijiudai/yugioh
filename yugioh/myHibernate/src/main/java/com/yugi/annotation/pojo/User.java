@@ -13,7 +13,7 @@ import javax.persistence.Version;
 /**
  * Created by Administrator on 2016/10/10.
  */
-@Data
+// @Data
 @NoArgsConstructor
 @Entity
 @Table(name = "t_user")
@@ -34,5 +34,38 @@ public class User {
     public User(String name, String pwd) {
         this.name = name;
         this.pwd = pwd;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        name = "呵呵";
+        this.name = name;
+    }
+
+    public String getPwd() {
+        return pwd;
+    }
+
+    public void setPwd(String pwd) {
+        this.pwd = pwd;
+    }
+
+    public int getVersion() {
+        return version;
+    }
+
+    public void setVersion(int version) {
+        this.version = version;
     }
 }

@@ -20,7 +20,6 @@ public class CtrlLogger {
 
     @Around("execution(* com.yugi.ctrl..*(..))")
     public Object recordSysLog(ProceedingJoinPoint point) throws Throwable{
-        System.out.println("lfkdjj================================================================");
         ctrlLog.info("{}.{}()",point.getTarget().getClass().getName(),point.getSignature().getName());
         return point.proceed();
     }

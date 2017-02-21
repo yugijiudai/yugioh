@@ -55,6 +55,8 @@
 
     })();
 </script>
+${token}
+${hehe}
 <form action="${pageContext.request.contextPath}/emp/third.do" method="post">
     <input name="emp[0].id">
     <input name="emp[0].name">

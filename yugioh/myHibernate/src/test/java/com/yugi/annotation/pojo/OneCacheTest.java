@@ -1,5 +1,6 @@
 package com.yugi.annotation.pojo;
 
+import com.yugi.bjsxt.*;
 import com.yugi.util.HibernateUtil;
 import lombok.extern.log4j.Log4j2;
 import org.hibernate.Session;
@@ -8,8 +9,12 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Administrator on 2016/10/9.
@@ -33,6 +38,35 @@ public class OneCacheTest {
         HibernateUtil.closeSession();
     }
 
+
+    @Test
+    public void test1(){
+        Category category = new Category();
+        category.setName("c");
+        session.save(category);
+        tx.commit();
+    }
+
+    @Test
+    public void test2(){
+        Category category = this.getCategory(1);
+        System.out.println(category.getBooks().size());
+        Book book = new Book("电击萌王", 80.0, "咳咳", new Date());
+        Book book2 = new Book("anime", 80.0, "咳咳", new Date());
+        Set<Book> books = new HashSet<>();
+        books.add(book);
+        books.add(book2);
+        category.setBooks(books);
+        session.saveOrUpdate(category);
+        tx.commit();
+        session.clear();
+        category = this.getCategory(1);
+        System.out.println(category.getBooks().size());
+    }
+
+    private Category getCategory(Integer id){
+        return (Category) session.get(Category.class, id);
+    }
 
     /**
      * get和load会查询缓存,也会放进缓存

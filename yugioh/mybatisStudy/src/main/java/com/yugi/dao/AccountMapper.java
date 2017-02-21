@@ -15,6 +15,7 @@ public interface AccountMapper {
 
 	List<Map<String,Object>> queryEmp();
 
+
 //	void update(Integer id);
 
 

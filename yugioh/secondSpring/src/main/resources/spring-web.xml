@@ -49,6 +49,15 @@
         <!-- 模板文件的后缀 -->
     </bean>
 
+    <!-- 拦截器配置 -->
+    <mvc:interceptors >
+        <!-- 配置Token拦截器，防止用户重复提交数据 -->
+        <mvc:interceptor >
+            <mvc:mapping path = "/**" />
+            <bean class = "com.yugi.Interceptor.TokenInterceptor" />
+        </mvc:interceptor >
+    </mvc:interceptors >
+
     <!--dwr相关配置-->
     <dwr:controller id="dwrController" debug="true"/>
     <bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
@@ -59,9 +68,10 @@
             </props>
         </property>
     </bean>
-    <dwr:annotation-scan base-package="com.yugi.impl" scanDataTransferObject="false" scanRemoteProxy="true"/>
-    <dwr:annotation-scan base-package="com.yugi.dao" scanDataTransferObject="false" scanRemoteProxy="true"/>
-    <dwr:annotation-scan base-package="com.yugi.pojo" scanDataTransferObject="true" scanRemoteProxy="true"/>
+    <!--这个扫描最好写在这里,不要写在spring-web中,因为junit扫描dwrController会报错-->
+    <!--<dwr:annotation-scan base-package="com.yugi.impl" scanDataTransferObject="false" scanRemoteProxy="true"/>-->
+    <!--<dwr:annotation-scan base-package="com.yugi.dao" scanDataTransferObject="false" scanRemoteProxy="true"/>-->
+    <!--<dwr:annotation-scan base-package="com.yugi.pojo" scanDataTransferObject="true" scanRemoteProxy="true"/>-->
     <!--设置需要dwr转化的实体类，格式为json传输到jsp页面-->
     <!--<dwr:configuration>-->
     <!--<dwr:convert type="bean" class="com.yugi.pojo.User"/>-->

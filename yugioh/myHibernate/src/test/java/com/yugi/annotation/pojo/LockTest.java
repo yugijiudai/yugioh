@@ -3,8 +3,11 @@ package com.yugi.annotation.pojo;
 import com.yugi.util.HibernateUtil;
 import lombok.extern.log4j.Log4j2;
 import org.hibernate.LockOptions;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.transform.Transformers;
+import org.hibernate.type.StandardBasicTypes;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -61,6 +64,38 @@ public class LockTest {
         tx.commit();
     }
 
+    @Test
+    public void testPessimisticLock3() {
+        String hql = "select * from t_user where id = 1";
+        SQLQuery sqlQuery = session.createSQLQuery(hql);
+        // sqlQuery.addScalar("id", StandardBasicTypes.INTEGER).addScalar("version", StandardBasicTypes.STRING);
+        // sqlQuery.setResultTransformer(Transformers.aliasToBean(User.class));
+        // sqlQuery.setResultTransformer(Transformers.aliasToBean(User.class));
+        sqlQuery.addEntity(User.class);
+        User user = (User) sqlQuery.uniqueResult();
+        String updateSql = "update t_user set name = '中断',version = version + 1 where id = 1 and version = ? ";
+        SQLQuery sqlQuery2 = session.createSQLQuery(updateSql);
+        sqlQuery2.setParameter(0, user.getVersion());
+        sqlQuery2.executeUpdate();
+        System.out.println();
+        tx.commit();
+    }
+
+    @Test
+    public void testPessimisticLock4() {
+        String hql = "select * from t_user where id > 1";
+        SQLQuery sqlQuery = session.createSQLQuery(hql);
+        // sqlQuery.addScalar("id", StandardBasicTypes.INTEGER).addScalar("version", StandardBasicTypes.STRING);
+        // sqlQuery.setResultTransformer(Transformers.aliasToBean(User.class));
+        sqlQuery.addEntity(User.class);
+        User user = (User) sqlQuery.uniqueResult();
+        String updateSql = "update t_user set name = '成功',version = version + 1 where id = 1 and version = ? ";
+        SQLQuery sqlQuery2 = session.createSQLQuery(updateSql);
+        sqlQuery2.setParameter(0, user.getVersion());
+        sqlQuery2.executeUpdate();
+        tx.commit();
+    }
+
 
     @Test
     public void testOptimisticLock1() {
@@ -73,6 +108,15 @@ public class LockTest {
     public void testOptimisticLock2() {
         User user = (User) session.get(User.class, 1);
         user.setName("呵呵2");
+        tx.commit();
+    }
+
+    @Test
+    public void testOptimisticLock3() {
+        String name = "注入',pwd = 'hehe";
+        String updateSql = "update t_user set name = '" + name + "' where id > 1 ";
+        SQLQuery sqlQuery2 = session.createSQLQuery(updateSql);
+        sqlQuery2.executeUpdate();
         tx.commit();
     }
 

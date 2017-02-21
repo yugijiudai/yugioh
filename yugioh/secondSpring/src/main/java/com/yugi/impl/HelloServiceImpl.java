@@ -4,6 +4,7 @@ import com.yugi.dao.UserDao;
 import com.yugi.pojo.User;
 import com.yugi.service.IHelloService;
 import org.directwebremoting.annotations.RemoteProxy;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 

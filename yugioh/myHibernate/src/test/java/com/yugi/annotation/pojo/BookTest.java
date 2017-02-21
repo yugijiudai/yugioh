@@ -2,14 +2,14 @@ package com.yugi.annotation.pojo;
 
 import com.yugi.util.HibernateUtil;
 import lombok.extern.log4j.Log4j2;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
+import org.hibernate.*;
+import org.hibernate.criterion.Restrictions;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Administrator on 2016/9/30.
@@ -41,16 +41,42 @@ public class BookTest {
         Category category4 = new Category("科幻");
         Category category5 = new Category("恐怖");
         book.setCategory(category1);
-        book2.setCategory(category2);
-        book3.setCategory(category3);
-        book4.setCategory(category4);
-        book5.setCategory(category5);
+        book2.setCategory(category1);
+        book3.setCategory(category1);
+        book4.setCategory(category2);
+        book5.setCategory(category2);
         session.save(book);
         session.save(book2);
         session.save(book3);
         session.save(book4);
         session.save(book5);
         tx.commit();
+    }
+    @Test
+    public void testSave() throws Exception {
+        Book book = new Book("电击萌王", 80.0, "咳咳", new Date());
+        Book book2 = new Book("anime", 80.0, "咳咳", new Date());
+        Category category1 = new Category("文学");
+        book.setCategory(category1);
+        book2.setCategory(category1);
+        session.save(book);
+        session.save(book2);
+        tx.commit();
+    }
+
+    @Test
+    public void testLoadFetch() throws Exception {
+        // String hql = "select distinct c from Category c join fetch c.books";
+        // List<Category> list = session.createQuery(hql).list();
+        List<Category> list = session.createCriteria(Category.class).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).
+                setFetchMode("books", FetchMode.JOIN).add(Restrictions.gt("id", 0)).list();
+        for (Category category : list) {
+            System.out.println(category);
+            Set<Book> books = category.getBooks();
+            for (Book book : books) {
+                System.out.println(book);
+            }
+        }
     }
 
 
@@ -59,6 +85,14 @@ public class BookTest {
         Book book = (Book) session.get(Book.class, 1);
         log.info(book);
         log.info(book.getCategory());
+    }
+
+    @Test
+    public void testLoadCategory(){
+        Category category = (Category) session.get(Category.class, 1);
+        log.info(category);
+        log.info(category.getBooks());
+
     }
 
     /**

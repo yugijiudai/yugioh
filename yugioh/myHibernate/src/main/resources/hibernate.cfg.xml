@@ -10,13 +10,13 @@
         <property name="hibernate.connection.password">111111</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <!--<property name="hibernate.connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>-->
-        <!--<property name="hibernate.connection.url">jdbc:sqlserver://localhost:1433;databaseName=hibernate4</property>-->
+        <!--<property name="hibernate.connection.url">jdbc:sqlserver://192.168.91.133:1433;databaseName=hibernate4</property>-->
         <!--<property name="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</property>-->
         <!--<property name="hibernate.connection.username">sa</property>-->
         <!--<property name="hibernate.connection.password">p2ssword</property>-->
         <property name="hibernate.show_sql">true</property>
-        <property name="hibernate.format_sql">true</property>
-        <property name="hibernate.use_sql_comments">true</property>
+        <property name="hibernate.format_sql">false</property>
+        <property name="hibernate.use_sql_comments">false</property>
 
 
         <!-- hibernate3的二级缓存配置 -->
@@ -35,12 +35,13 @@
         <!--3.validate:检测-->
         <!--4.update:如果表不存在则创建，有就不用创建-->
         <property name="hbm2ddl.auto">update</property>
-        <mapping resource="mapper/xml/entity/Book2.hbm.xml"/>
-        <mapping resource="mapper/xml/entity/Category2.hbm.xml"/>
-        <!--<mapping class="com.yugi.annotation.pojo.User"/>-->
+        <!--<mapping resource="mapper/xml/entity/Book2.hbm.xml"/>-->
+        <!--<mapping resource="mapper/xml/entity/Category2.hbm.xml"/>-->
+        <!--<mapping class="com.yugi.annotation.pojo.Student"/>-->
+        <!--<mapping class="com.yugi.annotation.pojo.Teacher"/>-->
         <!--<mapping resource="mapper/annotation/User.hbm.xml"/>-->
-        <!--<mapping class="com.yugi.annotation.pojo.Book"/>-->
-        <!--<mapping class="com.yugi.annotation.pojo.Category"/>-->
+        <mapping class="com.yugi.annotation.pojo.Book"/>
+        <mapping class="com.yugi.annotation.pojo.Category"/>
 
     </session-factory>
 </hibernate-configuration>

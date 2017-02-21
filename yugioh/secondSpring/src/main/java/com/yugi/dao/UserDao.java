@@ -7,9 +7,10 @@ import org.directwebremoting.spring.SpringCreator;
 
 /**
  * Created by Administrator on 2016/7/16.
+ * name="userDao"对应页面的dwr.engine._execute('dwr', 'userDao', 'sayHello', ['wtf!', function (data) {});
+ *
  */
 @RemoteProxy(creator = SpringCreator.class, creatorParams = @Param(name = "beanName", value = "userDao"),name="userDao")
-//@RemoteProxy(name = "userDao")
 public class UserDao {
 
     @RemoteMethod

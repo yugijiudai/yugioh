@@ -4,6 +4,7 @@ import com.yugi.util.HibernateUtil;
 import lombok.extern.log4j.Log4j2;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.cache.ehcache.internal.util.HibernateEhcacheUtils;
 import org.junit.Test;
 
 import java.util.Set;

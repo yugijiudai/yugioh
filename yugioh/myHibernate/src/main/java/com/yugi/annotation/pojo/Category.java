@@ -28,6 +28,7 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
+    @Lob
     private String name;
 
     // 不加mappedBy会多一张中间表!!!,这个category对应Book的category属性,但这样写只能由Book维护,即插入category,book的category_id都不会有值,

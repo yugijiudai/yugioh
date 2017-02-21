@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">-->
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<!--<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">-->
 
 <!--
 namespace指定了接口名,将此配置文件与接口做关联,这样Mybatis在自动实现接口时才会找到这个 对应的配置文件
@@ -13,5 +13,6 @@ namespace指定了接口名,将此配置文件与接口做关联,这样Mybatis�
     <select id="queryEmp" resultType="java.util.Map">
         SELECT * from emp
     </select>
+
 
 </mapper>

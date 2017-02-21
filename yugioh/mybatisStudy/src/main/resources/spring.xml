@@ -91,7 +91,7 @@
         <!--pom没加resource要用这个-->
         <!--<property name="mapperLocations" value="classpath:mapper/*.xml"/>-->
         <!--pom加了resource才能用这个-->
-        <property name="mapperLocations" value="classpath*:com/yugi/mapper/*.xml"></property>
+        <property name="mapperLocations" value="classpath*:com/yugi/mapper/*.xml"/>
         <!--这个是读resources里的-->
         <!--<property name="mapperLocations" value="classpath*:mapper/*.xml"></property>-->
     </bean>
