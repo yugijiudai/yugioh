@@ -6,13 +6,9 @@ import org.hibernate.LockOptions;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.transform.Transformers;
-import org.hibernate.type.StandardBasicTypes;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.List;
 
 /**
  * Created by Administrator on 2016/10/10.
@@ -59,10 +55,11 @@ public class LockTest {
     public void testPessimisticLock2() {
         User user = (User) session.get(User.class, 1, LockOptions.UPGRADE);
         log.info(user.getName());
-        user.setName("bbbb");
-        session.saveOrUpdate(user);
+        // user.setName("bbbb");
+        // session.saveOrUpdate(user);
         tx.commit();
     }
+
 
     @Test
     public void testPessimisticLock3() {
@@ -119,6 +116,8 @@ public class LockTest {
         sqlQuery2.executeUpdate();
         tx.commit();
     }
+
+
 
 
 }

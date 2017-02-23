@@ -13,7 +13,7 @@ import org.hibernate.tool.hbm2ddl.SchemaExport;
 public class HibernateUtil {
 
     private static Configuration cfg = null;
-    private static SessionFactory factory = null;
+    public static SessionFactory factory = null;
     private static Session session = null;
 
     static {

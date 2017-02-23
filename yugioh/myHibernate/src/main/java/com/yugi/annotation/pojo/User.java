@@ -49,7 +49,6 @@ public class User {
     }
 
     public void setName(String name) {
-        name = "呵呵";
         this.name = name;
     }
 
@@ -67,5 +66,15 @@ public class User {
 
     public void setVersion(int version) {
         this.version = version;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", pwd='" + pwd + '\'' +
+                ", version=" + version +
+                '}';
     }
 }

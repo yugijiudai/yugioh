@@ -13,21 +13,6 @@
     <artifactId>baseSpring</artifactId>
     <packaging>jar</packaging>
 
-    <properties>
-        <!--<spring_data_jpa_version>1.7.0.RELEASE</spring_data_jpa_version>-->
-        <!--<log4j_version>1.2.17</log4j_version>-->
-        <springframework_version>4.2.6.RELEASE</springframework_version>
-        <spring_aop_version>4.2.3.RELEASE</spring_aop_version>
-        <log4j2_version>2.4.1</log4j2_version>
-        <gson_version>2.3</gson_version>
-        <taglibs_version>1.1.2</taglibs_version>
-        <jstl_version>1.2</jstl_version>
-        <httpclient_version>4.3.3</httpclient_version>
-        <commons-logging_version>1.2</commons-logging_version>
-        <javax_servlet_version>2.3.0</javax_servlet_version>
-        <spring_aspects_version>3.2.5.RELEASE</spring_aspects_version>
-        <jackson_version>1.9.8</jackson_version>
-    </properties>
     <dependencies>
         <dependency>
             <groupId>mysql</groupId>
@@ -50,7 +35,6 @@
         <dependency>
             <groupId>javax.servlet.jsp</groupId>
             <artifactId>javax.servlet.jsp-api</artifactId>
-            <scope>provided</scope>
         </dependency>
         <!--spring-->
 
@@ -69,7 +53,6 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
-            <version>${springframework_version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
