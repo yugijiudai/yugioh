@@ -10,6 +10,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.List;
+
 /**
  * Created by Administrator on 2016/10/10.
  */
@@ -116,7 +118,6 @@ public class LockTest {
         sqlQuery2.executeUpdate();
         tx.commit();
     }
-
 
 
 

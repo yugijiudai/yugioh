@@ -75,7 +75,6 @@ public class AnoTest {
             // log.fatal("乐观锁更新成功!");
             // throw new HibernateException("乐观锁更新成功!");
         }
-
     }
 
 
