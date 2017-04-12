@@ -31,6 +31,6 @@ public class NoVisibility {
         new ReaderThread().start();
         number = 42;
         ready = true;
-        System.out.println(atomicInteger.getAndIncrement());
+        System.out.println(":" + atomicInteger.getAndIncrement());
     }
 }

@@ -13,6 +13,7 @@
         <module>springdata</module>
         <module>mybatisStudy</module>
         <module>myHibernate</module>
+        <module>mySelenium</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -57,6 +58,15 @@
         <dwr_version>3.0.M1</dwr_version>
         <testNg_version>6.10</testNg_version>
         <commons_collections4_version>4.1</commons_collections4_version>
+        <slf4j_version>1.7.22</slf4j_version>
+        <logback_core_version>1.1.8</logback_core_version>
+        <logback_classic_version>1.1.8</logback_classic_version>
+        <jboss_logging_version>3.1.3.GA</jboss_logging_version>
+        <log4j_version>1.2.17</log4j_version>
+        <c3p0_version>0.9.5-pre8</c3p0_version>
+        <resteasy_jaxrs_version>2.3.10.Final</resteasy_jaxrs_version>
+        <selenium_server_version>3.3.1</selenium_server_version>
+        <selenium_java_version>3.0.1</selenium_java_version>
     </properties>
 
     <!-- mvn clean install -Pdev ,如果下面plugin配置了跳过测试,即使运行这个命令,不管test.skip是否true都会跳过测试-->
@@ -75,6 +85,28 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>commons-logging</groupId>
+                <artifactId>commons-logging</artifactId>
+                <version>${commons-logging_version}</version>
+            </dependency>
+            <!--slf4j-->
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-core</artifactId>
+                <version>${logback_core_version}</version>
+            </dependency>
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>${logback_classic_version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j_version}</version>
+            </dependency>
+            <!--slf4j-->
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-collections4</artifactId>
@@ -189,11 +221,6 @@
                         <groupId>commons-logging</groupId>
                     </exclusion>
                 </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>commons-logging</groupId>
-                <artifactId>commons-logging</artifactId>
-                <version>${commons-logging_version}</version>
             </dependency>
             <dependency>
                 <groupId>com.google.code.gson</groupId>
@@ -372,6 +399,51 @@
                 <version>${testNg_version}</version>
                 <scope>test</scope>
             </dependency>
+            <dependency>
+                <groupId>org.seleniumhq.selenium</groupId>
+                <artifactId>selenium-server</artifactId>
+                <version>${selenium_server_version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.seleniumhq.selenium</groupId>
+                <artifactId>selenium-java</artifactId>
+                <version>${selenium_java_version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jboss.logging</groupId>
+                <artifactId>jboss-logging</artifactId>
+                <version>${jboss_logging_version}</version>
+            </dependency>
+            <dependency>
+                <groupId>log4j</groupId>
+                <artifactId>log4j</artifactId>
+                <version>${log4j_version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.mchange</groupId>
+                <artifactId>c3p0</artifactId>
+                <version>${c3p0_version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.code.gson</groupId>
+                <artifactId>gson</artifactId>
+                <version>${gson_version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jboss.resteasy</groupId>
+                <artifactId>resteasy-jaxrs</artifactId>
+                <version>${resteasy_jaxrs_version}</version>
+                <exclusions>
+                    <exclusion>
+                        <artifactId>jboss-logging</artifactId>
+                        <groupId>org.jboss.logging</groupId>
+                    </exclusion>
+                    <exclusion>
+                        <artifactId>httpclient</artifactId>
+                        <groupId>org.apache.httpcomponents</groupId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -416,7 +488,7 @@
                     </configuration>
                 </plugin>
 
-                <!--把war或者jar另外打包到指定的地方start-->
+                <!--把war或者jar另外打包到指定的地方,用了这个插件之后,会把自己打包成jar,配置文件在lib/名字.jar/web-inf/classes/里start-->
                 <plugin>
                     <artifactId>maven-war-plugin</artifactId>
                     <configuration>

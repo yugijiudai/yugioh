@@ -17,5 +17,13 @@ public class TestCreateTable {
         se.create(true, true);
     }
 
+    @Test
+    public void testCreateDB2() {
+        // SpringBeanManger
+       // LocalSessionFactoryBean sfb = (LocalSessionFactoryBean) SpringBeanManger.getApplicationContext().getBean("&sessionFactory");
+       // SchemaExport schema = new SchemaExport(sfb.getConfiguration());
+       // schema.create(true, true);
+   }
+
 
 }

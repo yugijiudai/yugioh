@@ -12,10 +12,12 @@ public class Node {
     public String value;
     boolean find;
     public Stack<String> stack = new Stack<>();
+    public Stack<String> result = new Stack<>();
 
     public Stack<String> find(Node node, String val) {
         if (node != null && !find) {
             stack.push(node.value);
+            result.push(node.value);
             if (node.value.equals(val)) {
                 find = true;
                 return stack;
@@ -28,7 +30,7 @@ public class Node {
                 }
             }
         }
-        return stack;
+        return result;
     }
 
 }

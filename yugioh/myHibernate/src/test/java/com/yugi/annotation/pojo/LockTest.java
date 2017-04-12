@@ -105,7 +105,7 @@ public class LockTest {
 
     @Test
     public void testOptimisticLock2() {
-        User user = (User) session.get(User.class, 1);
+        User user = (User) session.get(User.class, 1,LockOptions.UPGRADE);
         user.setName("呵呵2");
         tx.commit();
     }

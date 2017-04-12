@@ -28,7 +28,7 @@ public class TestNode {
         d.value = "D";
         e.value = "E";
         b.right = e;
-        Stack<String> stack = a.find(a,"E");
+        Stack<String> stack = a.find(a,"C");
         for (String s : stack) {
             System.out.print(s + "->");
         }
