@@ -67,6 +67,8 @@
         <resteasy_jaxrs_version>2.3.10.Final</resteasy_jaxrs_version>
         <selenium_server_version>3.3.1</selenium_server_version>
         <selenium_java_version>3.0.1</selenium_java_version>
+        <commons-lang3_version>3.4</commons-lang3_version>
+        <commons_lang_version>2.6</commons_lang_version>
     </properties>
 
     <!-- mvn clean install -Pdev ,如果下面plugin配置了跳过测试,即使运行这个命令,不管test.skip是否true都会跳过测试-->
@@ -443,6 +445,16 @@
                         <groupId>org.apache.httpcomponents</groupId>
                     </exclusion>
                 </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons-lang3_version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-lang</groupId>
+                <artifactId>commons-lang</artifactId>
+                <version>${commons_lang_version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
